@@ -6,6 +6,7 @@ Feature: Test basic workers query scenarios
   Scenario: Test query worker successfully
 
     * print '######## in query2'
+    * header karate-name = 'two'
     And params { $filter: 'name eq Tom' }
     When method get
     Then status 200
