@@ -2,3 +2,8 @@
 target/
 .idea/
 
+.metals/
+.classpath
+.project
+.settings/
+.vscode/

@@ -3,7 +3,8 @@ Feature: cats stateful crud
   Background:
     * def uuid = function(){ return java.util.UUID.randomUUID() + '' }
     * def cats = {}
-    * def delay = function(){ java.lang.Thread.sleep(850) }
+    * def tomcats = {name : 'Tom'}
+    * def delay = function(){ java.lang.Thread.sleep(1001) }
 
   Scenario: pathMatches('/cats') && methodIs('post')
     * def cat = request
@@ -14,6 +15,9 @@ Feature: cats stateful crud
 
   Scenario: pathMatches('/cats')
     * def response = $cats.*
+
+  Scenario: pathMatches('/cats?$filter=name eq Tom')
+    * def response = $tomcats.*
 
   Scenario: pathMatches('/cats/{id}') && methodIs('put')
     * eval cats[pathParams.id] = request
