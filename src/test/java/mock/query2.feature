@@ -10,4 +10,4 @@ Feature: Test basic workers query scenarios
     And params { $filter: 'name eq Tom' }
     When method get
     Then status 200
-    And assert responseTime < 10
+    And assert responseTime < 50

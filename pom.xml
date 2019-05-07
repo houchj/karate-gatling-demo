@@ -56,12 +56,14 @@
                 <version>${gatling.plugin.version}</version>
                 <configuration>
                     <simulationsFolder>src/test/java</simulationsFolder>
+                    <runMultipleSimulations>true</runMultipleSimulations>
                     <includes>
                         <include>mock.CatsKarateSimulation</include>
+                        <include>mock.CatsWKarateSimulation</include>
                     </includes>
                 </configuration>
-            </plugin>            
-        </plugins>        
+            </plugin>
+        </plugins>
     </build>
     <repositories>
         <repository>
