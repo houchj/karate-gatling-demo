@@ -10,20 +10,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.net.*;
 
 /**
  *
  * @author pthomas3
  */
 public class MockUtils {
-    
+
     public static void startServer() {
         File file = FileUtils.getFileRelativeTo(MockUtils.class, "mock.feature");
         FeatureServer server = FeatureServer.start(file, 0, false, null);
-        System.setProperty("mock.cats.url", "http://localhost:" + server.getPort() + "/cats");        
+        System.setProperty("mock.cats.url", "http://localhost:" + server.getPort() + "/cats");
     }
 
-    private static final List<String> catNames = (List) Runner.runFeature("classpath:mock/feeder.feature", null, false).get("names");
+    private static final List<String> catNames = (List) Runner.runFeature("classpath:mock/feeder.feature", null, false)
+            .get("names");
 
     private static final AtomicInteger counter = new AtomicInteger();
 
@@ -31,7 +33,7 @@ public class MockUtils {
         return catNames.get(counter.getAndIncrement() % catNames.size());
     }
 
-    public static Map<String, Object> myRpc(Map<String, Object> map, PerfContext context) {
+    public static Map<String, Object> myRpc(Map<String, Object> map, PerfContext context) throws Exception {
         long startTime = System.currentTimeMillis();
         // this is just an example, you can put any kind of code here
         int sleepTime = (Integer) map.get("sleep");
@@ -40,10 +42,12 @@ public class MockUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        if (sleepTime > 30000)
+            throw new java.net.SocketTimeoutException("test for failed report of gatling");
         long endTime = System.currentTimeMillis();
         // and here is where you send the performance data to the reporting engine
         context.capturePerfEvent("myRpc-" + sleepTime, startTime, endTime);
         return Collections.singletonMap("success", true);
     }
-    
+
 }

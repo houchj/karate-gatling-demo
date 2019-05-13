@@ -59,7 +59,6 @@
                     <runMultipleSimulations>true</runMultipleSimulations>
                     <includes>
                         <include>mock.CatsKarateSimulation</include>
-                        <include>mock.CatsWKarateSimulation</include>
                     </includes>
                 </configuration>
             </plugin>

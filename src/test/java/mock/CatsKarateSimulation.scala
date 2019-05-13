@@ -26,9 +26,9 @@ class CatsKarateSimulation extends Simulation {
   setUp(
     // create.inject(rampUsers(10) during (5 seconds)).protocols(protocol),
     // delete.inject(rampUsers(5) during (5 seconds)).protocols(protocol),
-    // custom.inject(rampUsers(10) during (5 seconds)).protocols(protocol)
-    query001.inject(rampUsers(100) during (1 seconds)).protocols(protocol),
-    query002.inject(rampUsers(100) during (1 seconds)).protocols(protocol)
+    custom.inject(rampUsers(10) during (10 seconds)).protocols(protocol)
+    // query001.inject(rampUsers(10) during (10 seconds)).protocols(protocol),
+    // query002.inject(rampUsers(10) during (10 seconds)).protocols(protocol)
   ).assertions(
     global.successfulRequests.percent.gt(10)
   )
